@@ -6,13 +6,29 @@ import * as path from "path";
 export async function activate(context: vscode.ExtensionContext) {
   console.log("✅ PR Name Fixer activated");
 
+  // Check for Git repository on startup
+  const workspacePath = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+  if (workspacePath && fs.existsSync(path.join(workspacePath, ".git"))) {
+    const ghReady = await checkGhAuth();
+    if (ghReady) {
+      installPrePushHook(workspacePath);
+      vscode.window.showInformationMessage("✅ PR Name Fixer: pre-push hook installed for this repository.");
+    }
+  } else if (workspacePath) {
+    vscode.window.showWarningMessage("No Git repository detected in the workspace.");
+  } else {
+    vscode.window.showErrorMessage("No workspace folder detected.");
+  }
+
   const disposable = vscode.commands.registerCommand("pr-name-fixer.executeTask", async () => {
     const workspacePath = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
-    if (workspacePath) {
+    if (workspacePath && fs.existsSync(path.join(workspacePath, ".git"))) {
       const ghReady = await checkGhAuth();
       if (ghReady) {
         installPrePushHook(workspacePath);
       }
+    } else if (workspacePath) {
+      vscode.window.showWarningMessage("No Git repository detected in the workspace.");
     } else {
       vscode.window.showErrorMessage("No workspace folder detected.");
     }
