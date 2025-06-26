@@ -100,6 +100,7 @@ async function ensureGhInstalledAndAuthenticated(workspacePath: string): Promise
   }
 
   const terminal = vscode.window.createTerminal("PR Name Fixer Setup");
+  
   terminal.show();
 
   vscode.window.showInformationMessage("Setting up GitHub CLI. Please follow the terminal prompts...");
