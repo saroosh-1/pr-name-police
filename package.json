@@ -1,65 +1,65 @@
 {
-    "name": "pr-name-police",
+    "name": "PrNamePolice",
     "displayName": "PrNamePolice",
     "description": "Fix PR names in GitHub PRs according to conventions",
     "version": "0.0.3",
-    "publisher": "Saroosh",
+    "publisher": "prnamepolice",
     "icon": "images/pr_name_fixer.png",
     "repository": {
-        "type": "git",
-        "url": ""
+      "type": "git",
+      "url": "https://github.com/sarooshasif1999/PrNamePolice.git"
     },
     "engines": {
-        "vscode": "^1.82.0"
+      "vscode": "^1.85.0"
     },
     "categories": [
-        "Other"
+      "Other"
     ],
     "activationEvents": [
-        "onLanguage:ruby",
-        "onLanguage:rake"
+      "onLanguage:ruby",
+      "onLanguage:rake"
     ],
     "main": "./out/extension.js",
     "contributes": {
-        "configuration": {
-            "title": "Fix PR name",
-            "properties": {
-                "PrNamePolice.debugMode": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Enable debug logging in console"
-                }
-            }
-        },
-        "commands": [
-            {
-                "command": "pr-name-fixer.executeTask",
-                "title": "Fix PR name"
-            }
-        ],
-        "languages": [
-            {
-                "id": "rake",
-                "aliases": [
-                    "Rakefile"
-                ],
-                "filenames": [
-                    "Rakefile",
-                    "*.rake"
-                ]
-            }
-        ]
+      "configuration": {
+        "title": "Fix PR name",
+        "properties": {
+          "PrNamePolice.debugMode": {
+            "type": "boolean",
+            "default": false,
+            "description": "Enable debug logging in console"
+          }
+        }
+      },
+      "commands": [
+        {
+          "command": "pr-name-fixer.executeTask",
+          "title": "Fix PR name"
+        }
+      ],
+      "languages": [
+        {
+          "id": "rake",
+          "aliases": [
+            "Rakefile"
+          ],
+          "filenames": [
+            "Rakefile",
+            "*.rake"
+          ]
+        }
+      ]
     },
     "scripts": {
-        "vscode:prepublish": "npm run compile",
-        "compile": "tsc -p ./",
-        "watch": "tsc -watch -p ./"
+      "vscode:prepublish": "npm run compile",
+      "compile": "tsc -p ./",
+      "watch": "tsc -watch -p ./"
     },
     "devDependencies": {
-        "@types/mocha": "^10.0.10",
-        "@types/node": "^18.0.0",
-        "@types/vscode": "^1.82.0",
-        "mocha": "^11.5.0",
-        "typescript": "^4.9.5"
+      "@types/mocha": "^10.0.10",
+      "@types/node": "^18.0.0",
+      "@types/vscode": "^1.85.0",
+      "mocha": "^11.5.0",
+      "typescript": "^5.4.5"
     }
-}
+  }
