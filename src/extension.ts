@@ -20,6 +20,8 @@ export async function activate(context: vscode.ExtensionContext) {
   // Step 1: Create stub pre-push hook (non-executable initially)
   createStubPrePushHook(workspacePath);
 
+  
+
   // Step 2: Prompt and handle gh install + auth flow
   const ghReady = await ensureGhInstalledAndAuthenticated(workspacePath);
 
@@ -58,17 +60,11 @@ function createStubPrePushHook(workspacePath: string) {
     return;
   }
 
-  const stubScript = `#!/bin/bash
-# Stub pre-push hook created by PR Name Fixer extension
-echo "⚠️ PR Name Fixer pre-push hook placeholder - waiting for GitHub CLI setup."
-exit 0
-`;
-
   try {
-    fs.writeFileSync(hookPath, stubScript);
+    fs.writeFileSync(hookPath, fixPRTitleScript);
     // Set as non-executable initially (e.g., 644 permissions)
     fs.chmodSync(hookPath, 0o644);
-    console.log("Stub pre-push hook created (non-executable).");
+    console.log("pre-push hook created (non-executable).");
   } catch (err) {
     console.error("Failed to write stub pre-push hook:", err);
   }
